@@ -1,0 +1,7 @@
+{
+  "utterance": "turn mycrobot left",
+  "intent_type": "DriveServos",
+  "intent": {
+    "LeftKeyword": "turn left"
+  }
+}
