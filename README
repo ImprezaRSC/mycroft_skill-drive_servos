@@ -1,0 +1,20 @@
+Mycroft Skill: DriveServos
+This Skill allows your Mycroft to controll two Servos
+connected to the Raspberry Pi GPIO Pins.
+
+Snippit from mycroft.conf:
+  "DriveServos": {
+    "left_pin": 18,
+    "right_pin": 17,
+    "left_forward": 2.5,
+    "right_forward": 2.5,
+    "left_backward": 20.5,
+    "right_backward": 20.5,
+    "minimal_move_degrees": 45,
+    "minimal_mode_degrees_in_seconds": 1
+  }
+
+Note:
+ - *_forward & *_backward values are the PWM duties for the servos
+ - minimal_move_degrees: the degrees your mycroft will move with every command
+ - minimal_mode_degrees_in_seconds: Is the time, your mycroft needs to reach the minimal_move_degrees
