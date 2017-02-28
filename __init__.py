@@ -31,7 +31,6 @@ class DriveServos(MycroftSkill):
 
     def initialize(self):
         if self.config:
-            logger.error("SD:Config gefunden, lade daten :)")
             self.left_pin = self.config.get('left_pin', 18)
             self.right_pin = self.config.get('right_pin', 17)
             self.left_forward = self.config.get('left_forward', 20.5)
@@ -43,19 +42,20 @@ class DriveServos(MycroftSkill):
         else:
             logger.warn("You havn't configured DriveServos!")
 
-        self.load_regex_files(join(dirname(__file__), 'regex', 'en-us'))
+        intent = IntentBuilder("TurnLeft").require("LeftKeyword").build()
+        self.register_intent(intent, self.handle_move_left)
 
-        right_intent = IntentBuilder("TurnRight").require("RightKeyword").build()
-        self.register_intent(right_intent, self.handle_move_right)
+        intent = IntentBuilder("TurnRight").require("RightKeyword").build()
+        self.register_intent(intent, self.handle_move_right)
 
-        forward_intent = IntentBuilder("MoveForward").require("ForwardKeyword").build()
-        self.register_intent(forward_intent, self.handle_move_forward)
+        intent = IntentBuilder("MoveForward").require("ForwardKeyword").build()
+        self.register_intent(intent, self.handle_move_forward)
 
-        backward_intent = IntentBuilder("MoveBackward").require("BackwardKeyword").build()
-        self.register_intent(backward_intent, self.handle_move_backward)
+        intent = IntentBuilder("MoveBackward").require("BackwardKeyword").build()
+        self.register_intent(intent, self.handle_move_backward)
 
-        turn_intent = IntentBuilder("TurnAround").require("TurnKeyword").build()
-        self.register_intent(turn_intent, self.handle_turn_around)
+        intent = IntentBuilder("TurnAround").require("TurnKeyword").build()
+        self.register_intent(intent, self.handle_turn_around)
 
         #GPIO.setwarnings(False)
         GPIO.setmode(GPIO.BCM)
